@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -13,6 +15,10 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String productId;
+
+	@ManyToOne
+	@JoinColumn(name="user_Id")
+	private Usr usr;
 
 	private String productName;
 
@@ -28,7 +34,8 @@ public class Product {
 
 	public Product() {}
 
-	public Product(String productName, int productPrice, String productImage) {
+	public Product(Usr usr, String productName, int productPrice, String productImage) {
+		this.usr = usr;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productImage = productImage;
